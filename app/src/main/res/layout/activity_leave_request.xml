@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Activity.AddRequest">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <LinearLayout
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/reason"
+                android:minLines="3"
+                android:hint="Reason"
+                android:gravity="top"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/leavefrom"
+                android:editable="false"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:minLines="3"
+                android:hint="Leave from"
+                android:textColor="@color/black"
+                android:gravity="top"
+                android:drawableRight="@drawable/ic_calender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/noofdays"
+                android:singleLine="true"
+                android:inputType="numberDecimal"
+                android:imeOptions="actionDone"
+                android:minLines="3"
+                android:hint="No. of Days"
+                android:textColor="@color/black"
+                android:gravity="top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:textAllCaps="true"
+                android:background="@drawable/button_decent_round"
+                android:textSize="@dimen/textsize_16sp"
+                android:textStyle="bold"
+                android:paddingLeft="@dimen/textsize_20sp"
+                android:paddingRight="@dimen/textsize_20sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/dimen_30dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>
