@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -36,6 +37,7 @@ dependencies {
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-vector-drawable:$rootProject.supportLibraryVersion"
     implementation "com.android.support:animated-vector-drawable:$rootProject.supportLibraryVersion"
+
     // font
     implementation "uk.co.chrisjenx:calligraphy:$rootProject.calligraphyVersion"
     // image
@@ -44,8 +46,16 @@ dependencies {
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
     // dialog
     implementation 'com.github.f0ris.sweetalert:library:1.5.1'
+    //Circle Imageview
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
     implementation 'com.google.android.gms:play-services-location:15.0.1'
+
+    //networking
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
+
+    //image loading
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 
 }

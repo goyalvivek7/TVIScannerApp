@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.tvi.tvitracker.R;
 import com.tvi.tvitracker.databinding.ActivityLeaveRequestBinding;
@@ -24,8 +25,9 @@ public class LeaveRequest extends AppCompatActivity implements DatePickerDialog.
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_leave_request);
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("Add Leave Request");
+        getSupportActionBar().setTitle("Leave Request");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding.toolbar.setTitleTextColor(0xFFFFFFFF);
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
@@ -33,10 +35,16 @@ public class LeaveRequest extends AppCompatActivity implements DatePickerDialog.
         datePickerDialog = new DatePickerDialog(
                 LeaveRequest.this,AlertDialog.THEME_DEVICE_DEFAULT_DARK, LeaveRequest.this, year, month, day);
 
-        binding.leavefrom.setOnClickListener(new View.OnClickListener() {
+        binding.fromdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                datePickerDialog.show();
+            }
+        });
 
+        binding.toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 datePickerDialog.show();
             }
         });
@@ -56,13 +64,8 @@ public class LeaveRequest extends AppCompatActivity implements DatePickerDialog.
             binding.reason.setError("Can't remain blank");
             binding.reason.requestFocus();
             return false;
-        }else if (binding.leavefrom.getText().toString().isEmpty()){
-            binding.leavefrom.setError("Can't remain blank");
-            binding.leavefrom.requestFocus();
-            return false;
-        }else if (binding.noofdays.getText().toString().isEmpty()){
-            binding.noofdays.setError("Can't remain blank");
-            binding.noofdays.requestFocus();
+        }else if (binding.leavetype.getSelectedItemPosition() == 0){
+            Toast.makeText(this, "Please Select Leave Type", Toast.LENGTH_SHORT).show();
             return false;
         }else
             return true;
@@ -72,8 +75,10 @@ public class LeaveRequest extends AppCompatActivity implements DatePickerDialog.
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         Calendar newDate = Calendar.getInstance();
         newDate.set(i, i1, i2);
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
-        binding.leavefrom.setText(dateFormatter.format(newDate.getTime()));
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd");
+        SimpleDateFormat dateFormatter1 = new SimpleDateFormat("MMM yyyy");
+        binding.fromday.setText(dateFormatter.format(newDate.getTime()));
+        binding.frommnth.setText(dateFormatter1.format(newDate.getTime()));
     }
 
     @Override

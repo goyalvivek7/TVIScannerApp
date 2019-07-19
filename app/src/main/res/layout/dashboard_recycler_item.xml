@@ -16,6 +16,7 @@
     cardView:cardElevation="10dp"
     app:cardUseCompatPadding="true"
     android:clickable="true"
+    android:id="@+id/mainlayout"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
     >

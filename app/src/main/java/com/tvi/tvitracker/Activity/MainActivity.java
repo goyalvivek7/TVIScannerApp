@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 animation(binding.home,binding.setting,binding.profile);
             }
         });
+
         binding.settingLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 animation(binding.profile,binding.setting,binding.home);
             }
         });
+
         HomeAdapter adapter = new HomeAdapter(getSupportFragmentManager());
         binding.viewpager.setAdapter(adapter);
         binding.viewpager.setCurrentItem(1);

@@ -73,6 +73,14 @@
         <item>High</item>
     </string-array>
 
+    <string-array name="leavetype">
+        <item>Select Leave Type</item>
+        <item>Sick Leave</item>
+        <item>Paid Leave</item>
+        <item>Emergancy Leave</item>
+        <item>Maternity Leave</item>
+    </string-array>
+
     <string-array name="products">
         <item>Select Product</item>
         <item>Web Development</item>

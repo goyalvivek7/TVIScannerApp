@@ -544,4 +544,20 @@ public class StaticDataHelper {
         return formattedDate;
     }
 
+    public static String getcurrendateforattendance() {
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
+        String formattedDate = df.format(c);
+        return formattedDate;
+    }
+
+    public static String getcurrentimeforattendance() {
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
+        String formattedDate = df.format(c);
+        return formattedDate;
+    }
+
+
+
 }
