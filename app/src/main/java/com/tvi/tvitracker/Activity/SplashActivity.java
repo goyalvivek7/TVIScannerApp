@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.tvi.tvitracker.BASE.BaseActivity;
 import com.tvi.tvitracker.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -21,4 +22,9 @@ public class SplashActivity extends AppCompatActivity {
             }
         },3000);
     }
+
+    protected void setUp() {
+
+    }
+
 }

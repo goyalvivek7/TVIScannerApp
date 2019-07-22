@@ -2,31 +2,37 @@ package com.tvi.tvitracker.Activity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.Toast;
 
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 import com.tvi.tvitracker.BASE.BaseActivity;
 import com.tvi.tvitracker.R;
-import com.tvi.tvitracker.databinding.ActivityLeaveRequestBinding;
+import com.tvi.tvitracker.databinding.ActivityAddExpenseBinding;
+import com.tvi.tvitracker.databinding.ActivityAddMeetingBinding;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class LeaveRequest extends BaseActivity implements DatePickerDialog.OnDateSetListener {
+public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDateSetListener {
 
-    ActivityLeaveRequestBinding binding;
+    ActivityAddExpenseBinding binding;
     DatePickerDialog datePickerDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_leave_request);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_expense);
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("Leave Request");
+        getSupportActionBar().setTitle("Add Expense");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setTitleTextColor(0xFFFFFFFF);
         Calendar c = Calendar.getInstance();
@@ -34,7 +40,8 @@ public class LeaveRequest extends BaseActivity implements DatePickerDialog.OnDat
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
         datePickerDialog = new DatePickerDialog(
-                LeaveRequest.this,AlertDialog.THEME_DEVICE_DEFAULT_DARK, LeaveRequest.this, year, month, day);
+                AddExpenses.this,AlertDialog.THEME_DEVICE_DEFAULT_DARK, AddExpenses.this, year, month, day);
+
 
         binding.fromdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,10 +50,12 @@ public class LeaveRequest extends BaseActivity implements DatePickerDialog.OnDat
             }
         });
 
-        binding.toolbar.setOnClickListener(new View.OnClickListener() {
+        binding.addbill.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                datePickerDialog.show();
+            public void onClick(View v) {
+                CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .start(AddExpenses.this);
             }
         });
 
@@ -66,14 +75,11 @@ public class LeaveRequest extends BaseActivity implements DatePickerDialog.OnDat
     }
 
     public boolean checkValidation(){
-        if (binding.reason.getText().toString().isEmpty()){
-            binding.reason.setError("Can't remain blank");
-            binding.reason.requestFocus();
-            return false;
-        }else if (binding.leavetype.getSelectedItemPosition() == 0){
-            Toast.makeText(this, "Please Select Leave Type", Toast.LENGTH_SHORT).show();
-            return false;
-        }else
+//        if (binding.reason.getText().toString().isEmpty()){
+//            binding.reason.setError("Can't remain blank");
+//            binding.reason.requestFocus();
+//            return false;
+//        }else
             return true;
     }
 
@@ -83,8 +89,7 @@ public class LeaveRequest extends BaseActivity implements DatePickerDialog.OnDat
         newDate.set(i, i1, i2);
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd");
         SimpleDateFormat dateFormatter1 = new SimpleDateFormat("MMM yyyy");
-        binding.fromday.setText(dateFormatter.format(newDate.getTime()));
-        binding.frommnth.setText(dateFormatter1.format(newDate.getTime()));
+
     }
 
     @Override
@@ -95,6 +100,22 @@ public class LeaveRequest extends BaseActivity implements DatePickerDialog.OnDat
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                File file = new File(resultUri.getPath());
+                Log.e("file", file.getPath());
+                binding.bill.setImageURI(resultUri);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+                Log.e("Error", error.getMessage());
+            }
         }
     }
 }

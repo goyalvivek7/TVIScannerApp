@@ -9,11 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.tvi.tvitracker.BASE.BaseActivity;
 import com.tvi.tvitracker.R;
 import com.tvi.tvitracker.ViewpagerAdapeter.HomeAdapter;
 import com.tvi.tvitracker.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     ActivityMainBinding binding;
 
     @Override
@@ -75,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void setUp() {
+
+    }
+
     public void animation(ImageView animated, ImageView Nonaminated, ImageView NOanimation){
 
         ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(animated, "scaleX", 1.5f);
@@ -102,15 +108,4 @@ public class MainActivity extends AppCompatActivity {
         scaleDown2.start();
     }
 
-//    public void animation2(ImageView animated){
-//
-//        ObjectAnimator scaleDownX1 = ObjectAnimator.ofFloat(animated, "scaleX", 0.75f);
-//        ObjectAnimator scaleDownY1 = ObjectAnimator.ofFloat(animated, "scaleY", 0.75f);
-//        scaleDownX1.setDuration(100);
-//        scaleDownY.1setDuration(100);
-//        AnimatorSet scaleDown1 = new AnimatorSet();
-//        scaleDown1.play(scaleDownX1).with(scaleDownY1);
-//        scaleDown1.start();
-//
-//    }
 }

@@ -1,4 +1,4 @@
-package com.tvi.tvitracker.RecyclerAdapter;
+package com.tvi.tvitracker.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tvi.tvitracker.Activity.AddLeadActivity;
+import com.tvi.tvitracker.Activity.AllExpenses;
 import com.tvi.tvitracker.Activity.AllLeaves;
+import com.tvi.tvitracker.Activity.AllMeetings;
 import com.tvi.tvitracker.Activity.PuntchInActivity;
+import com.tvi.tvitracker.Activity.Visit_list;
 import com.tvi.tvitracker.ModelClasses.DashboardItem;
 import com.tvi.tvitracker.R;
 import com.tvi.tvitracker.databinding.DashboardRecyclerItemBinding;
@@ -53,13 +56,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
                         context.startActivity(new Intent(context, AllLeaves.class));
                         break;
                     case 2:
-                        context.startActivity(new Intent(context, AllLeaves.class));
+                        context.startActivity(new Intent(context, Visit_list.class));
                         break;
                     case 3:
-                        context.startActivity(new Intent(context, AllLeaves.class));
+                        context.startActivity(new Intent(context, AllExpenses.class));
                         break;
                     case 4:
-                        context.startActivity(new Intent(context, AllLeaves.class));
+                        context.startActivity(new Intent(context, AllMeetings.class));
                         break;
                     case 5:
                         context.startActivity(new Intent(context, AddLeadActivity.class));

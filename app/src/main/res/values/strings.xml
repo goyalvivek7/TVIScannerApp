@@ -94,5 +94,13 @@
         <item>Social Media Optimization</item>
     </string-array>
 
+    <string-array name="visittype">
+        <item>Select Visit Type</item>
+        <item>Meeting</item>
+        <item>Project Review</item>
+        <item>Problem solving</item>
+
+    </string-array>
+
 
 </resources>

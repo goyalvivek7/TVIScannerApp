@@ -19,13 +19,9 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -167,9 +163,10 @@ public class PuntchInActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (mallowPermission.checkPermissionForCamera()) {
-                    if (mallowPermission.checkPermissionForWRITE_EXTERNAL_STORAGE())
+                    if (mallowPermission.checkPermissionForWRITE_EXTERNAL_STORAGE()) {
+                        Logger1.e("permission found", "permisision found");
                         openCameraIntent();
-                    else
+                    }else
                         mallowPermission.requestPermissionForWRITE_EXTERNAL_STORAGE();
                 } else {
                     mallowPermission.requestPermissionForCamera();
@@ -206,8 +203,8 @@ public class PuntchInActivity extends BaseActivity {
             } catch (IOException ex) {
                 Logger1.e("Error", ex.getMessage());
             }
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this, "com.kalpanadeliveryboy.provider", photoFile);
+            if (photoFile1 != null) {
+                Uri photoURI = FileProvider.getUriForFile(this, "com.tvi.tvitracker.provider", photoFile1);
                 pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(pictureIntent, REQUEST_CAPTURE_IMAGE);
             }
@@ -482,7 +479,7 @@ public class PuntchInActivity extends BaseActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     Logger1.e("success", "success");
                     if (photoFile1 != null)
-                        Picasso.get().load(photoFile1).placeholder(R.drawable.button_decent_round).into(binding.selfie);
+                        Picasso.get().load(photoFile1).placeholder(R.drawable.user).into(binding.selfie);
                     else
                         Logger1.e("error", "error");
                 } else if (resultCode == Activity.RESULT_CANCELED) {

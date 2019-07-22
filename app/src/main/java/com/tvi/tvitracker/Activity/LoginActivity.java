@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.tvi.tvitracker.BASE.BaseActivity;
 import com.tvi.tvitracker.R;
 import com.tvi.tvitracker.databinding.ActivityLoginBinding;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     ActivityLoginBinding binding;
 
@@ -26,5 +27,10 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void setUp() {
+
     }
 }

@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.HomeFragment">
+    tools:context=".Fragment.HomeFragment"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="10dp"
+        android:gravity="center_horizontal"
+        app:title="TVI Employee"
+        app:titleTextColor="@color/white">
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:text="Status : Not Working"
+        android:textSize="14sp"
+        fontPath="fonts/proximanova_bold.ttf"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/datetime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/status"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="04 March 2019, 05:11 PM"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/datetime"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="108, Ist floor, Geetanjali Tower, Civil Lines, Jaipur"
+        android:textSize="14sp" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_marginRight="10dp"
         android:id="@+id/recycler"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
