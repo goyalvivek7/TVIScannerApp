@@ -80,6 +80,19 @@
         <item>Emergancy Leave</item>
         <item>Maternity Leave</item>
     </string-array>
+    <string-array name="visittype">
+        <item>Select Visit Type</item>
+        <item>Meeting</item>
+        <item>Project Review</item>
+        <item>Problem solving</item>
+        <item>Dance Leave</item>
+    </string-array>
+    <string-array name="expensename">
+        <item>Select Expense Type</item>
+        <item>Travelling</item>
+        <item>Hotel</item>
+        <item>Other</item>
+    </string-array>
 
     <string-array name="products">
         <item>Select Product</item>
