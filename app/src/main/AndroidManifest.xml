@@ -21,15 +21,20 @@
         <activity android:name=".Activity.AllLeaves"></activity>
         <activity android:name=".Activity.AllMeetings"></activity>
         <activity android:name=".Activity.AddMeeting"></activity>
-        <activity android:name=".Activity.AddExpenses"></activity>
+        <activity android:name=".Activity.AddExpenses"
+            android:theme="@style/Theme.Transparent"/>
+
         <activity android:name=".Activity.AllExpenses"></activity>
-        <activity android:name=".Activity.Visit_Formm"/>
-        <activity android:name=".Activity.Visit_list"/>
+        <activity android:name=".Activity.Visit_Formm"
+            android:theme="@style/Theme.Transparent"/>
+        <activity android:name=".Activity.Visit_list"
+            />
         <activity android:name=".Activity.MainActivity">
 
         </activity>
         <activity android:name=".Activity.LoginActivity"/>
-        <activity android:name=".Activity.LeaveRequest"/>
+        <activity android:name=".Activity.LeaveRequest"
+            android:theme="@style/Theme.Transparent"/>
         <activity android:name=".Activity.AddLeadActivity"/>
         <activity android:name=".Activity.PuntchInActivity"/>
         <activity android:name=".Activity.SplashActivity" >

@@ -1,24 +1,33 @@
 package com.tvi.tvitracker.Activity;
 
+import android.animation.Animator;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tvi.tvitracker.BASE.BaseActivity;
 import com.tvi.tvitracker.R;
+import com.tvi.tvitracker.Utils.Circular_Reveal_Animation;
 import com.tvi.tvitracker.Utils.Logger1;
 import com.tvi.tvitracker.Utils.StaticDataHelper;
 import com.tvi.tvitracker.databinding.ActivityLeaveRequestBinding;
@@ -35,12 +44,16 @@ public class LeaveRequest extends BaseActivity implements DatePickerDialog.OnDat
     ActivityLeaveRequestBinding binding;
     DatePickerDialog datePickerDialog;
     String datefor = "";
+    Circular_Reveal_Animation circular_reveal_animation;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_leave_request);
+        circular_reveal_animation=new Circular_Reveal_Animation();
         setSupportActionBar(binding.toolbar);
+        context = LeaveRequest.this;
         getSupportActionBar().setTitle("Leave Request");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setTitleTextColor(0xFFFFFFFF);
@@ -102,7 +115,31 @@ public class LeaveRequest extends BaseActivity implements DatePickerDialog.OnDat
         CustomAdapter adapter1 = new CustomAdapter(this, R.layout.custom_spinner_items, R.id.textView, expenseheadlist);
         binding.leavetype.setAdapter(adapter1);
 
+
+        if (savedInstanceState == null) {
+            binding.LinearL.setVisibility(View.INVISIBLE);
+
+            ViewTreeObserver viewTreeObserver = binding.LinearL.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onGlobalLayout() {
+                        circular_reveal_animation.circularRevealActivity(binding.LinearL,LeaveRequest.this);
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                            binding.LinearL.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        } else {
+                            binding.LinearL.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                    }
+                });
+            }
+        }
+
     }
+
+
+
 
     @Override
     protected void setUp() {
@@ -197,6 +234,44 @@ public class LeaveRequest extends BaseActivity implements DatePickerDialog.OnDat
                 tv.setTextColor(Color.BLACK);
             }
             return view;
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int cx = binding.LinearL.getRight()-circular_reveal_animation.getDips(48,context);
+            int cy =binding.LinearL.getBottom()-circular_reveal_animation.getDips(48,context);
+            float finalRadius = Math.max(binding.LinearL.getWidth(), binding.LinearL.getHeight());
+            Animator circularReveal = ViewAnimationUtils.createCircularReveal(binding.LinearL, cx, cy, finalRadius, 0);
+
+            circularReveal.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    binding.LinearL.setVisibility(View.INVISIBLE);
+                    finish();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+
+                }
+            });
+            circularReveal.setDuration(500);
+            circularReveal.start();
+        }else{
+            super.onBackPressed();
         }
     }
 }

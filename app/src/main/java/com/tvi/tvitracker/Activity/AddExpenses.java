@@ -1,5 +1,6 @@
 package com.tvi.tvitracker.Activity;
 
+import android.animation.Animator;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -7,14 +8,18 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
@@ -25,6 +30,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.tvi.tvitracker.BASE.BaseActivity;
 import com.tvi.tvitracker.R;
+import com.tvi.tvitracker.Utils.Circular_Reveal_Animation;
 import com.tvi.tvitracker.databinding.ActivityAddExpenseBinding;
 import com.tvi.tvitracker.databinding.ActivityAddMeetingBinding;
 
@@ -39,6 +45,7 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
 
     ActivityAddExpenseBinding binding;
     DatePickerDialog datePickerDialog;
+    Circular_Reveal_Animation circular_reveal_animation;
     String type = "";
     List<String> expenseheadlist = new ArrayList<>();
     List<String> paymentmodelist = new ArrayList<>();
@@ -48,6 +55,7 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_expense);
         setSupportActionBar(binding.toolbar);
+         circular_reveal_animation=new Circular_Reveal_Animation();
         getSupportActionBar().setTitle("Add Expense");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setTitleTextColor(0xFFFFFFFF);
@@ -117,6 +125,26 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
                 }
             }
         });
+
+        if (savedInstanceState == null) {
+            binding.addexpenses.setVisibility(View.INVISIBLE);
+
+            ViewTreeObserver viewTreeObserver = binding.addexpenses.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onGlobalLayout() {
+                        circular_reveal_animation.circularRevealActivity(binding.addexpenses,AddExpenses.this);
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                            binding.addexpenses.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        } else {
+                            binding.addexpenses.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                    }
+                });
+            }
+        }
     }
 
     @Override
@@ -248,4 +276,41 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
             return view;
         }
     }
+    @Override
+    public void onBackPressed() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int cx = binding.addexpenses.getRight()-circular_reveal_animation.getDips(48,AddExpenses.this);
+            int cy =binding.addexpenses.getBottom()-circular_reveal_animation.getDips(48,AddExpenses.this);
+            float finalRadius = Math.max(binding.addexpenses.getWidth(), binding.addexpenses.getHeight());
+            Animator circularReveal = ViewAnimationUtils.createCircularReveal(binding.addexpenses, cx, cy, finalRadius, 0);
+
+            circularReveal.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    binding.addexpenses.setVisibility(View.INVISIBLE);
+                    finish();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+
+                }
+            });
+            circularReveal.setDuration(500);
+            circularReveal.start();
+        }else{
+            super.onBackPressed();
+        }
+    }
+
 }
