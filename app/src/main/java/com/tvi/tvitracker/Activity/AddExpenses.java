@@ -2,15 +2,24 @@ package com.tvi.tvitracker.Activity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -21,12 +30,19 @@ import com.tvi.tvitracker.databinding.ActivityAddMeetingBinding;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDateSetListener {
 
     ActivityAddExpenseBinding binding;
     DatePickerDialog datePickerDialog;
+    String type = "";
+    List<String> expenseheadlist = new ArrayList<>();
+    List<String> paymentmodelist = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +51,23 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
         getSupportActionBar().setTitle("Add Expense");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setTitleTextColor(0xFFFFFFFF);
+        String[] expensearray = getResources().getStringArray(R.array.expensehead);
+        String[] paymentarray = getResources().getStringArray(R.array.paymenttype);
+        expenseheadlist = Arrays.asList(expensearray);
+        paymentmodelist = Arrays.asList(paymentarray);
+
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
         datePickerDialog = new DatePickerDialog(
-                AddExpenses.this,AlertDialog.THEME_DEVICE_DEFAULT_DARK, AddExpenses.this, year, month, day);
+                AddExpenses.this,R.style.datepicker, AddExpenses.this, year, month, day);
 
+        CustomAdapter adapter1 = new CustomAdapter(this, R.layout.custom_spinner_items, R.id.textView, expenseheadlist);
+        binding.selecthead.setAdapter(adapter1);
+
+        CustomAdapter adapter2 = new CustomAdapter(this, R.layout.custom_spinner_items, R.id.textView, paymentmodelist);
+        binding.typetype.setAdapter(adapter2);
 
         binding.fromdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +93,30 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
                 }
             }
         });
+
+        binding.radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                if (checkedId == R.id.approval){
+                    type = "approval";
+                    binding.amountCard.setVisibility(View.VISIBLE);
+                    binding.amount.setHint("Expected Amount");
+                    binding.expenseheadCard.setVisibility(View.VISIBLE);
+                    binding.expensenameCard.setVisibility(View.VISIBLE);
+                    binding.billCard.setVisibility(View.GONE);
+                    binding.paymentCard.setVisibility(View.GONE);
+                }else if (checkedId == R.id.expenses){
+                    type = "expense";
+                    binding.amountCard.setVisibility(View.VISIBLE);
+                    binding.amount.setHint("Enter Amount");
+                    binding.expenseheadCard.setVisibility(View.VISIBLE);
+                    binding.expensenameCard.setVisibility(View.VISIBLE);
+                    binding.billCard.setVisibility(View.VISIBLE);
+                    binding.paymentCard.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override
@@ -75,11 +125,49 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
     }
 
     public boolean checkValidation(){
-//        if (binding.reason.getText().toString().isEmpty()){
-//            binding.reason.setError("Can't remain blank");
-//            binding.reason.requestFocus();
-//            return false;
-//        }else
+        if (type.isEmpty()){
+            Toast.makeText(this, "Please Select Expense type", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if (type.equalsIgnoreCase("approval")){
+            return validationforapproval();
+        }else if (type.equalsIgnoreCase("expense")){
+            return validationforexpense();
+        }else
+            return true;
+    }
+
+    public boolean validationforapproval(){
+        if (binding.selecthead.getSelectedItemPosition()==0){
+            Toast.makeText(this, "Please Select Expense head", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if (binding.expensename.getText().toString().isEmpty()){
+            binding.expensename.setError("Please enter Expense name");
+            binding.expensename.requestFocus();
+            return false;
+        }else
+            return true;
+    }
+
+    public boolean validationforexpense(){
+
+        if (binding.selecthead.getSelectedItemPosition()==0){
+            Toast.makeText(this, "Please Select Expense head", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if (binding.expensename.getText().toString().isEmpty()){
+            binding.expensename.setError("Please enter Expense name");
+            binding.expensename.requestFocus();
+            return false;
+        }else if (binding.amount.getText().toString().isEmpty()){
+            binding.expensename.setError("Please enter Expense amount");
+            binding.expensename.requestFocus();
+            return false;
+        }else if (binding.bill.getDrawable() == null){
+            Toast.makeText(this, "Please Upload Bill", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if (binding.typetype.getSelectedItemPosition()==0){
+            Toast.makeText(this, "Please Select Payment Mode", Toast.LENGTH_SHORT).show();
+            return false;
+        }else
             return true;
     }
 
@@ -116,6 +204,48 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
                 Exception error = result.getError();
                 Log.e("Error", error.getMessage());
             }
+        }
+    }
+
+
+    public class CustomAdapter extends ArrayAdapter {
+
+        public CustomAdapter(Context context, int resource, int textViewResourceId, List objects) {
+            super(context, resource, textViewResourceId, objects);
+
+        }
+
+        @Override
+        public int getCount() {
+            return super.getCount();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            TextView tv = view.findViewById(R.id.textView);
+            if (position == 0) {
+                tv.setTextColor(getResources().getColor(R.color.gray));
+            } else {
+                tv.setTextColor(Color.BLACK);
+            }
+            return view;
+        }
+
+        @Override
+        public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            View view = super.getDropDownView(position, convertView, parent);
+            float scale = getResources().getDisplayMetrics().density;
+            int dpAsPixels = (int) (5 * scale + 0.5f);
+            view.setPadding(dpAsPixels, dpAsPixels, dpAsPixels, dpAsPixels);
+            TextView tv = view.findViewById(R.id.textView);
+            tv.setTextSize(16);
+            if (position == 0) {
+                tv.setTextColor(getResources().getColor(R.color.gray));
+            } else {
+                tv.setTextColor(Color.BLACK);
+            }
+            return view;
         }
     }
 }

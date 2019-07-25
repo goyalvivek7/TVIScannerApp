@@ -2,18 +2,30 @@ package com.tvi.tvitracker.Activity;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tvi.tvitracker.R;
 import com.tvi.tvitracker.databinding.ActivityVisitFormmBinding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Visit_Formm extends AppCompatActivity {
     ActivityVisitFormmBinding binding;
+
+
+    List<String> statelist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +43,11 @@ public class Visit_Formm extends AppCompatActivity {
                 }
             }
         });
+
+
+
+        CustomAdapter adapter3 = new CustomAdapter(this, R.layout.custom_spinner_items, R.id.textView, statelist);
+        binding.selectproduct.setAdapter(adapter3);
 
 
     }
@@ -68,6 +85,47 @@ public class Visit_Formm extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public class CustomAdapter extends ArrayAdapter {
+
+        public CustomAdapter(Context context, int resource, int textViewResourceId, List objects) {
+            super(context, resource, textViewResourceId, objects);
+
+        }
+
+        @Override
+        public int getCount() {
+            return super.getCount();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            TextView tv = view.findViewById(R.id.textView);
+            if (position == 0) {
+                tv.setTextColor(getResources().getColor(R.color.gray));
+            } else {
+                tv.setTextColor(Color.BLACK);
+            }
+            return view;
+        }
+
+        @Override
+        public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            View view = super.getDropDownView(position, convertView, parent);
+            float scale = getResources().getDisplayMetrics().density;
+            int dpAsPixels = (int) (5 * scale + 0.5f);
+            view.setPadding(dpAsPixels, dpAsPixels, dpAsPixels, dpAsPixels);
+            TextView tv = view.findViewById(R.id.textView);
+            tv.setTextSize(16);
+            if (position == 0) {
+                tv.setTextColor(getResources().getColor(R.color.gray));
+            } else {
+                tv.setTextColor(Color.BLACK);
+            }
+            return view;
         }
     }
 }

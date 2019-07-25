@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.tvi.tvitracker"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -59,6 +59,7 @@ dependencies {
 
     //image cropper
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
+
 
 
 }

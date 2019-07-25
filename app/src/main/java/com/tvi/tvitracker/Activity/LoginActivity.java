@@ -14,6 +14,7 @@ import com.tvi.tvitracker.databinding.ActivityLoginBinding;
 public class LoginActivity extends BaseActivity {
 
     ActivityLoginBinding binding;
+    boolean loginwithotps = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,25 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 finish();
+            }
+        });
+
+        binding.loginwithotp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!loginwithotps) {
+                    binding.passlay.setVisibility(View.GONE);
+                    binding.email.setHint("Mobile No.");
+                    binding.loginwithotp.setText("Login With Password");
+                    binding.login.setText("Send OTP");
+                    loginwithotps = true;
+                }else{
+                    binding.passlay.setVisibility(View.VISIBLE);
+                    binding.email.setHint("Email id / Mobile No.");
+                    binding.loginwithotp.setText("Login With OTP");
+                    binding.login.setText("Login");
+                    loginwithotps = false;
+                }
             }
         });
     }

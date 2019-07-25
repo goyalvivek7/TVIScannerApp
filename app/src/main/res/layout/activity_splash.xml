@@ -15,7 +15,7 @@
         android:layout_centerInParent="true"
         android:padding="10dp"
         android:src="@drawable/tvi_logo"
-        android:text="True Value Infosoft Pvt. Ltd."
+        android:text="Company Name"
         android:textAppearance="@style/AppTab.TextAppearance"
         android:textColor="@color/white"
         android:textSize="@dimen/dimen_30dp"

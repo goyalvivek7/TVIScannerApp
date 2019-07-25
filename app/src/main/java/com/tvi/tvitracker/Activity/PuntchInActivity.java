@@ -24,9 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -69,7 +66,7 @@ public class PuntchInActivity extends BaseActivity {
 
     private static final int REQUEST_CAPTURE_IMAGE = 1000;
     ActivityPuntchInBinding binding;
-    String type = "";
+    String type = "checkin";
     MarshMallowPermission mallowPermission;
     String imageFilePath;
     File photoFile = null;
@@ -88,7 +85,6 @@ public class PuntchInActivity extends BaseActivity {
     private Location mCurrentLocation;
     private Boolean mRequestingLocationUpdates;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,12 +100,13 @@ public class PuntchInActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setTitleTextColor(0xFFFFFFFF);
         mallowPermission = new MarshMallowPermission(this);
-        type = getIntent().getStringExtra("type");
+        if (getIntent().getStringExtra("type") != null)
+            type = getIntent().getStringExtra("type");
         binding.time.setText(StaticDataHelper.getcurrentimeforattendance());
         binding.date.setText(StaticDataHelper.getcurrendateforattendance());
 
         if (mallowPermission.checkPermissionForACCESS_FINE_LOCATION()) {
-
+            startLocationUpdates();
         } else {
             mallowPermission.requestPermissionForACCESS_FINE_LOCATION();
         }
@@ -125,7 +122,10 @@ public class PuntchInActivity extends BaseActivity {
                                     if (photoFile1 == null) {
                                         Toast.makeText(PuntchInActivity.this, "Please take a selfie", Toast.LENGTH_SHORT).show();
                                     } else {
+
                                         punchIn();
+                                        Toast.makeText(PuntchInActivity.this, "Attendance Marked Successfully", Toast.LENGTH_SHORT).show();
+                                        finish();
                                     }
                                 else {
                                     Toast.makeText(PuntchInActivity.this, "Location not found", Toast.LENGTH_SHORT).show();
@@ -143,6 +143,8 @@ public class PuntchInActivity extends BaseActivity {
                                         Toast.makeText(PuntchInActivity.this, "Please take a selfie", Toast.LENGTH_SHORT).show();
                                     } else {
                                         punchOut();
+                                        Toast.makeText(PuntchInActivity.this, "Attendance Marked Successfully", Toast.LENGTH_SHORT).show();
+                                        finish();
                                     }
                                 else {
                                     Toast.makeText(PuntchInActivity.this, "Location not found", Toast.LENGTH_SHORT).show();
@@ -166,7 +168,7 @@ public class PuntchInActivity extends BaseActivity {
                     if (mallowPermission.checkPermissionForWRITE_EXTERNAL_STORAGE()) {
                         Logger1.e("permission found", "permisision found");
                         openCameraIntent();
-                    }else
+                    } else
                         mallowPermission.requestPermissionForWRITE_EXTERNAL_STORAGE();
                 } else {
                     mallowPermission.requestPermissionForCamera();
@@ -270,30 +272,30 @@ public class PuntchInActivity extends BaseActivity {
         jsonObject.put("image", base64);
         Log.wtf("punchin param", jsonObject.toString());
 
-        AndroidNetworking.post(AppConstants.BASEURL)
-                .addJSONObjectBody(jsonObject)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        hideLoading();
-                        Logger1.e("punchin", "success : " + response.toString());
-
-                        if (response.optString("status").equalsIgnoreCase("success")) {
-                            finish();
-                            Toast.makeText(PuntchInActivity.this, "Thank You! Your attendance is marked for today", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(PuntchInActivity.this, response.optString("msg"), Toast.LENGTH_SHORT).show();
-                        }
-                        Logger1.e("punchin Response", response.toString());
-                    }
-
-                    @Override
-                    public void onError(ANError error) {
-                        hideLoading();
-                        Logger1.e("punchin Error", error.toString());
-                    }
-                });
+//        AndroidNetworking.post(AppConstants.BASEURL)
+//                .addJSONObjectBody(jsonObject)
+//                .build()
+//                .getAsJSONObject(new JSONObjectRequestListener() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        hideLoading();
+//                        Logger1.e("punchin", "success : " + response.toString());
+//
+//                        if (response.optString("status").equalsIgnoreCase("success")) {
+//                            finish();
+//                            Toast.makeText(PuntchInActivity.this, "Thank You! Your attendance is marked for today", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(PuntchInActivity.this, response.optString("msg"), Toast.LENGTH_SHORT).show();
+//                        }
+//                        Logger1.e("punchin Response", response.toString());
+//                    }
+//
+//                    @Override
+//                    public void onError(ANError error) {
+//                        hideLoading();
+//                        Logger1.e("punchin Error", error.toString());
+//                    }
+//                });
     }
 
     public void punchOut() throws JSONException {
@@ -314,30 +316,30 @@ public class PuntchInActivity extends BaseActivity {
         jsonObject.put("image", base64);
         Log.wtf("punchout param", jsonObject.toString());
 
-        AndroidNetworking.post(AppConstants.BASEURL)
-                .addJSONObjectBody(jsonObject)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        hideLoading();
-                        Logger1.e("punchout", "success : " + response.toString());
-
-                        if (response.optString("status").equalsIgnoreCase("success")) {
-                            finish();
-                            Toast.makeText(PuntchInActivity.this, "Thank You! Your checkout attendance is marked for today", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(PuntchInActivity.this, response.optString("msg"), Toast.LENGTH_SHORT).show();
-                        }
-                        Logger1.e("punchout Response", response.toString());
-                    }
-
-                    @Override
-                    public void onError(ANError error) {
-                        hideLoading();
-                        Logger1.e("punchout Error", error.toString());
-                    }
-                });
+//        AndroidNetworking.post(AppConstants.BASEURL)
+//                .addJSONObjectBody(jsonObject)
+//                .build()
+//                .getAsJSONObject(new JSONObjectRequestListener() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        hideLoading();
+//                        Logger1.e("punchout", "success : " + response.toString());
+//
+//                        if (response.optString("status").equalsIgnoreCase("success")) {
+//                            finish();
+//                            Toast.makeText(PuntchInActivity.this, "Thank You! Your checkout attendance is marked for today", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(PuntchInActivity.this, response.optString("msg"), Toast.LENGTH_SHORT).show();
+//                        }
+//                        Logger1.e("punchout Response", response.toString());
+//                    }
+//
+//                    @Override
+//                    public void onError(ANError error) {
+//                        hideLoading();
+//                        Logger1.e("punchout Error", error.toString());
+//                    }
+//                });
     }
 
     private void init() {

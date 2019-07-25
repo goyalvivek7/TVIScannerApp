@@ -471,6 +471,16 @@ public class StaticDataHelper {
             e.printStackTrace();
         }
     }
+    public static long gettimedifference1(final Calendar cal1, final Calendar cal2) {
+
+        long millis1 = cal1.getTimeInMillis();
+        long millis2 = cal2.getTimeInMillis();
+        long diff = millis2 - millis1;
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+
+        System.out.println("In days: " + diffDays + " days.");
+        return  diffDays;
+    }
 
     public static void showSnackBar(View v, String msg) {
         LinearLayout.LayoutParams objLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

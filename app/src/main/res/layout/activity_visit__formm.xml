@@ -38,7 +38,6 @@
                 android:background="@color/colorPrimary" />
 
             <EditText
-
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,6 +45,7 @@
                 android:background="@android:color/transparent"
                 android:hint="Name"
                 android:inputType="text|textCapSentences" />
+
         </LinearLayout>
 
 
@@ -165,8 +165,43 @@
                 android:id="@+id/selectvisit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:entries="@array/visittype">
+
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/et_background"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_margin="10dp"
-                android:entries="@array/visittype"></Spinner>
+                android:background="@drawable/visit_type" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary" />
+
+            <Spinner
+                android:id="@+id/selectproduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:entries="@array/selectproduct">
+
+            </Spinner>
         </LinearLayout>
 
         <LinearLayout

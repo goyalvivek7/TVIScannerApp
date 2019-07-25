@@ -96,9 +96,36 @@
 
     <string-array name="visittype">
         <item>Select Visit Type</item>
+        <item>Sales</item>
         <item>Meeting</item>
         <item>Project Review</item>
         <item>Problem solving</item>
+
+    </string-array>
+    <string-array name="selectproduct">
+        <item>Select Product</item>
+        <item>Bulk SMS</item>
+        <item>App Development</item>
+        <item>Website Development</item>
+        <item>Digital Marketing</item>
+
+    </string-array>
+
+    <string-array name="expensehead">
+        <item>Expense Head</item>
+        <item>Travel Expenses</item>
+        <item>Food Expenses</item>
+        <item>Other Expenses</item>
+
+    </string-array>
+
+    <string-array name="paymenttype">
+        <item>Payment Type</item>
+        <item>Cash</item>
+        <item>Cheque</item>
+        <item>Paytm</item>
+        <item>Credit/Debit card</item>
+        <item>Other Online</item>
 
     </string-array>
 
