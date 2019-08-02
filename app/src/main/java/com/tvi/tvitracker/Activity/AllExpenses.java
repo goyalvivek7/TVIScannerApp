@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.tvi.tvitracker.Adapter.ExpenseAdapter;
 import com.tvi.tvitracker.Adapter.MeetingAdapter;
 import com.tvi.tvitracker.BASE.BaseActivity;
@@ -73,6 +72,6 @@ public class AllExpenses extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Animatoo.animateInAndOut(AllExpenses.this);
+
     }
 }

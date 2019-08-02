@@ -25,7 +25,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -584,6 +583,6 @@ public class PuntchInActivity extends BaseActivity {
     @Override
     public void onBackPressed(){
         super.onBackPressed();
-        Animatoo.animateInAndOut(PuntchInActivity.this); //fire the slide left animation
+//        Animatoo.animateInAndOut(PuntchInActivity.this); //fire the slide left animation
     }
 }

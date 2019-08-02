@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.tvi.tvitracker.Adapter.LeavesAdapter;
 import com.tvi.tvitracker.BASE.BaseActivity;
 import com.tvi.tvitracker.CustomDialog.Leave_Filter;
@@ -78,6 +77,6 @@ public class AllLeaves extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Animatoo.animateInAndOut(AllLeaves.this);
+//        Animatoo.animateInAndOut(AllLeaves.this);
     }
 }

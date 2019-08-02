@@ -4,7 +4,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.tvi.tvitracker.BASE.BaseActivity;
 import com.tvi.tvitracker.R;
 import com.tvi.tvitracker.Utils.Logger1;
@@ -54,6 +53,6 @@ public class AddLeadActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Animatoo.animateInAndOut(AddLeadActivity.this);
+//        Animatoo.animateInAndOut(AddLeadActivity.this);
     }
 }

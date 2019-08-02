@@ -37,8 +37,9 @@
             android:theme="@style/Theme.Transparent"/>
         <activity android:name=".Activity.AddLeadActivity"/>
         <activity android:name=".Activity.PuntchInActivity"/>
-        <activity android:name=".Activity.SplashActivity" >
+
         <activity android:name=".Activity.Expense_View"></activity>
+        <activity android:name=".Activity.SplashActivity" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

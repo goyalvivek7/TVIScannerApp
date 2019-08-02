@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.tvi.tvitracker.Activity.AddLeadActivity;
 import com.tvi.tvitracker.Activity.AllExpenses;
 import com.tvi.tvitracker.Activity.AllLeaves;
@@ -52,35 +51,35 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
                 switch (i) {
                     case 0:
                         context.startActivity(new Intent(context, PuntchInActivity.class));
-                       Animatoo.animateInAndOut(context);
+
                         break;
                     case 1:
                         context.startActivity(new Intent(context, AllLeaves.class));
-                        Animatoo.animateInAndOut(context);
+
                         break;
                     case 2:
                         context.startActivity(new Intent(context, Visit_list.class));
-                        Animatoo.animateInAndOut(context);
+
                         break;
                     case 3:
                         context.startActivity(new Intent(context, AllExpenses.class));
-                        Animatoo.animateInAndOut(context);
+
                         break;
                     case 4:
                         context.startActivity(new Intent(context, AllMeetings.class));
-                        Animatoo.animateInAndOut(context);
+
                         break;
                     case 5:
                         context.startActivity(new Intent(context, AddLeadActivity.class));
-                        Animatoo.animateInAndOut(context);
+
                         break;
                     case 6:
                         context.startActivity(new Intent(context, AllLeaves.class));
-                        Animatoo.animateInAndOut(context);
+
                         break;
                     case 7:
                         context.startActivity(new Intent(context, AllLeaves.class));
-                        Animatoo.animateInAndOut(context);
+
                         break;
                 }
             }
