@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +24,9 @@ import android.widget.Toast;
 
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+import com.tvi.tvitracker.Adapter.ImageAdapter;
 import com.tvi.tvitracker.BASE.BaseActivity;
+import com.tvi.tvitracker.Interface.Delete_Image;
 import com.tvi.tvitracker.R;
 import com.tvi.tvitracker.databinding.ActivityAddExpenseBinding;
 import com.tvi.tvitracker.databinding.ActivityAddMeetingBinding;
@@ -42,6 +45,16 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
     String type = "";
     List<String> expenseheadlist = new ArrayList<>();
     List<String> paymentmodelist = new ArrayList<>();
+    List<File> selectedfiles = new ArrayList<>();
+    ImageAdapter adapter;
+
+    Delete_Image callback = new Delete_Image() {
+        @Override
+        public void delete(int position) {
+            selectedfiles.remove(position);
+            adapter.additems(selectedfiles);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +68,11 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
         String[] paymentarray = getResources().getStringArray(R.array.paymenttype);
         expenseheadlist = Arrays.asList(expensearray);
         paymentmodelist = Arrays.asList(paymentarray);
+
+        adapter = new ImageAdapter(this, callback);
+        binding.bills.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
+        binding.bills.setAdapter(adapter);
 
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -199,7 +217,9 @@ public class AddExpenses extends BaseActivity implements DatePickerDialog.OnDate
                 Uri resultUri = result.getUri();
                 File file = new File(resultUri.getPath());
                 Log.e("file", file.getPath());
-                binding.bill.setImageURI(resultUri);
+                selectedfiles.add(file);
+                adapter.additem(file);
+
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
                 Log.e("Error", error.getMessage());
