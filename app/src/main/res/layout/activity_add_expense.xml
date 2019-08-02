@@ -2,7 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -15,6 +16,14 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -25,346 +34,343 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="5dp"
-                    app:cardUseCompatPadding="true">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <RadioGroup
-                            android:id="@+id/radiogroup"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <RadioButton
-                                android:id="@+id/approval"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Approval"
-                                android:textSize="13sp" />
-
-                            <RadioButton
-                                android:id="@+id/expenses"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Expense"
-                                android:textSize="13sp" />
-
-                        </RadioGroup>
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/fromdate"
+                    <RadioGroup
+                        android:id="@+id/radiogroup"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp"
-                        app:cardUseCompatPadding="true">
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
-                        <LinearLayout
+                        <RadioButton
+                            android:layout_weight="1"
+                            android:id="@+id/approval"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Approval"
+                            android:textSize="13sp" />
+
+                        <RadioButton
+                            android:layout_weight="1"
+                            android:id="@+id/expenses"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Expense"
+                            android:textSize="13sp"
+                            />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/fromdate"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="10dp">
+                            android:layout_height="wrap_content">
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:layout_width="@dimen/textsize_20sp"
+                                android:layout_height="20dp"
+                                android:id="@+id/image"
+                                app:srcCompat="@drawable/ic_calendar"
+                                android:layout_alignParentRight="true"/>
+
+                            <LinearLayout
+                                android:layout_below="@id/image"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginBottom="15dp"
+                                android:layout_centerHorizontal="true"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
                                 <TextView
+                                    android:id="@+id/fromday"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Date"
+                                    android:text="15"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/frommnth"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="July 2019"
+                                    android:layout_marginLeft="5dp"
                                     android:textSize="13sp"
                                     android:textStyle="bold" />
 
-                                <ImageView
-                                    android:id="@+id/image"
-                                    android:layout_width="@dimen/textsize_20sp"
-                                    android:layout_height="20dp"
-                                    android:layout_alignParentRight="true"
-                                    app:srcCompat="@drawable/ic_calendar" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/image"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="15dp"
-                                    android:layout_marginBottom="15dp"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:id="@+id/fromday"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="15"
-                                        android:textSize="20sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/frommnth"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="5dp"
-                                        android:text="July 2019"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold" />
-
-                                </LinearLayout>
-                            </RelativeLayout>
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-                </LinearLayout>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/expensehead_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="5dp"
-                    app:cardUseCompatPadding="true">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <Spinner
-                            android:id="@+id/selecthead"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:entries="@array/expensehead"
-                            android:padding="10dp"
-                            android:textSize="13sp" />
-
-                    </RelativeLayout>
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
                 </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/expensename_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="5dp"
-                    app:cardUseCompatPadding="true">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <EditText
-                            android:id="@+id/expensename"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:hint="Expense Name"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            android:textSize="13sp">
-
-                        </EditText>
-
-                    </RelativeLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/amount_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="5dp"
-                    app:cardUseCompatPadding="true">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <ImageView
-                            android:id="@+id/rupee"
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:layout_centerVertical="true"
-                            app:srcCompat="@drawable/ic_rupee"
-
-                            />
-
-                        <EditText
-                            android:id="@+id/amount"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/rupee"
-                            android:background="@color/white"
-                            android:hint="Expense Amount"
-                            android:imeOptions="actionNext"
-                            android:inputType="number"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            android:textSize="13sp">
-
-                        </EditText>
-                    </RelativeLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/remarkview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="5dp"
-                    app:cardUseCompatPadding="true">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <EditText
-                            android:id="@+id/remark"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:hint="Expense Remark"
-                            android:imeOptions="actionDone"
-                            android:inputType="text"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            android:textSize="13sp">
-
-                        </EditText>
-                    </RelativeLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/payment_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="5dp"
-                    app:cardUseCompatPadding="true">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <Spinner
-                            android:id="@+id/typetype"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:entries="@array/paymenttype"
-                            android:padding="10dp"
-                            android:textSize="13sp" />
-                    </RelativeLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/bill_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="5dp"
-                    app:cardUseCompatPadding="true">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/bills"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="10sp"
-                            android:layout_toLeftOf="@id/addbill">
-
-                        </android.support.v7.widget.RecyclerView>
-
-                        <ImageView
-                            android:id="@+id/bill"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp" />
-
-                        <Button
-                            android:id="@+id/addbill"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/button_decent_round"
-                            android:paddingLeft="@dimen/textsize_20sp"
-                            android:paddingRight="@dimen/textsize_20sp"
-                            android:text="Add Bill"
-                            android:textAllCaps="true"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/textsize_12sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                </android.support.v7.widget.CardView>
-
-                <Button
-                    android:id="@+id/submit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="@dimen/dimen_30dp"
-                    android:layout_marginTop="@dimen/dimen_30dp"
-                    android:layout_marginRight="@dimen/dimen_30dp"
-                    android:background="@drawable/button_decent_round"
-                    android:paddingLeft="@dimen/textsize_20sp"
-                    android:paddingRight="@dimen/textsize_20sp"
-                    android:text="@string/submit"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textsize_16sp"
-                    android:textStyle="bold" />
-
             </LinearLayout>
-        </ScrollView>
 
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/expensehead_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/selecthead"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:textSize="13sp"
+                        android:padding="10dp"
+                        android:entries="@array/expensehead"
+
+                        >
+
+                    </Spinner>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/expensename_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/expensename"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:textSize="13sp"
+                        android:padding="10dp"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:hint="Expense Name">
+
+                    </EditText>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/amount_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:textSize="13sp"
+                        android:padding="10dp"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:hint="Expense Amount">
+
+                    </EditText>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/remarkview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:textSize="13sp"
+                        android:padding="10dp"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:hint="Expense Remark">
+
+                    </EditText>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/payment_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/typetype"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:textSize="13sp"
+                        android:padding="10dp"
+                        android:entries="@array/paymenttype"
+
+                        >
+
+                    </Spinner>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/bill_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/bill"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp" />
+
+                    <Button
+                        android:id="@+id/addbill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add Bill"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:paddingLeft="@dimen/textsize_20sp"
+                        android:paddingRight="@dimen/textsize_20sp"
+                        android:textAllCaps="true"
+                        android:background="@drawable/button_decent_round"
+                        android:textSize="@dimen/textsize_12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"
+                        />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:textAllCaps="true"
+                android:background="@drawable/button_decent_round"
+                android:textSize="@dimen/textsize_16sp"
+                android:textStyle="bold"
+                android:paddingLeft="@dimen/textsize_20sp"
+                android:paddingRight="@dimen/textsize_20sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/dimen_30dp"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:layout_marginRight="@dimen/dimen_30dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+        </LinearLayout>
+</ScrollView>
     </LinearLayout>
 </layout>

@@ -1,19 +1,26 @@
 package com.tvi.tvitracker.Activity;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.tvi.tvitracker.Adapter.ExpenseAdapter;
 import com.tvi.tvitracker.Adapter.MeetingAdapter;
 import com.tvi.tvitracker.BASE.BaseActivity;
 import com.tvi.tvitracker.Model.ExpenseModel;
 import com.tvi.tvitracker.Model.MeetingModel;
 import com.tvi.tvitracker.R;
+import com.tvi.tvitracker.Utils.Circular_Reveal_Animation;
 import com.tvi.tvitracker.databinding.ActivityAllLeavesBinding;
 
 import java.util.ArrayList;
@@ -22,12 +29,14 @@ import java.util.List;
 public class AllExpenses extends BaseActivity {
 
     ActivityAllLeavesBinding binding;
+
     List<ExpenseModel> modellist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_all_leaves);
         setSupportActionBar(binding.toolbar);
+
         getSupportActionBar().setTitle("All Expenses");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setTitleTextColor(0xFFFFFFFF);
@@ -42,7 +51,10 @@ public class AllExpenses extends BaseActivity {
             }
         });
 
+
     }
+
+
 
     @Override
     protected void setUp() {
@@ -58,4 +70,9 @@ public class AllExpenses extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateInAndOut(AllExpenses.this);
+    }
 }

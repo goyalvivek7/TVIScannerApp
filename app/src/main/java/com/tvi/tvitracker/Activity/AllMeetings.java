@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.tvi.tvitracker.Adapter.LeavesAdapter;
 import com.tvi.tvitracker.Adapter.MeetingAdapter;
 import com.tvi.tvitracker.Model.LeaveModel;
@@ -52,4 +53,9 @@ public class AllMeetings extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateInAndOut(AllMeetings.this);
+    }
 }

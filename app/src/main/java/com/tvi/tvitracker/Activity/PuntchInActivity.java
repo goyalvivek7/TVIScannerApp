@@ -3,6 +3,7 @@ package com.tvi.tvitracker.Activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -24,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -177,6 +179,8 @@ public class PuntchInActivity extends BaseActivity {
         });
 
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -576,5 +580,10 @@ public class PuntchInActivity extends BaseActivity {
 
         is.close();
         return bytes;
+    }
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Animatoo.animateInAndOut(PuntchInActivity.this); //fire the slide left animation
     }
 }

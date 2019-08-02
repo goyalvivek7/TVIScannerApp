@@ -2,6 +2,7 @@ package com.tvi.tvitracker.Activity;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -78,6 +79,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void setUp() {
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 

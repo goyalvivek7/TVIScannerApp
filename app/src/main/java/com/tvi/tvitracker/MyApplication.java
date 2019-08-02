@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.tvi.tvitracker.Utils.MarshMallowPermission;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,7 +21,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  */
 
 public class MyApplication extends Application {
-
+MarshMallowPermission marshMallowPermission;
     public static final String TAG = MyApplication.class.getSimpleName();
 //    private RequestQueue mRequestQueue;
     Gson gson;
